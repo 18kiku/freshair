@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kiku.freshair">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <application
+        android:name="com.kiku.freshair.ApplicationSave"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@drawable/open"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/open"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FreshAir">
+        <activity
+            android:name="com.kiku.freshair.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.FreshAir.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name="com.kiku.freshair.WindowActivity"
+            android:label="창문" >
+
+        </activity>
+        <receiver android:name="com.kiku.freshair.AlarmReceiver">
+
+        </receiver>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="36e12793078efa95e687041232504916"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwxImFulK63I1KMn2TI5K34zh_NpVEZfk"/>
+
+    </application>
+
+</manifest>

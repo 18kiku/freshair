@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dust_container"
+    android:background="@color/gray"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GetDust.GetDustFragment">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:text="    "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textSize="50sp"
+                        android:id="@+id/stationname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="측정시간"
+                        android:textSize="25sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textSize="28sp"
+                        android:id="@+id/datatime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="\n"
+                    android:textSize="15sp"/>
+
+                <androidx.cardview.widget.CardView
+                    app:cardBackgroundColor="@color/gray"
+                    android:id="@+id/base_cardview"
+                    style="@style/Base.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.473"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.021">
+
+                    <!--This is a ConstraintLayout for the entire CardView
+                               including the expandable portion-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.511"
+                        tools:layout_editor_absoluteX="-55dp">
+
+                        <!--This is a ConstraintLayout for the fixed portion
+                            of the CardView. The elements
+                            that lie within the fixed portion of the CardView
+                            can be constrained to this layout.-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/fixed_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0">
+
+
+                            <ImageView
+                                android:id="@+id/khaigradeimage"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout"
+                                app:layout_constraintVertical_bias="0.14" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="통합대기환경지수"
+                                android:textSize="25dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout"
+                                app:layout_constraintHorizontal_bias="0.922"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout"
+                                app:layout_constraintVertical_bias="0.042" />
+
+                            <!--This is ImageButton for the expansion icon.-->
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/khaivaluetext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="120dp"
+                                android:textSize="20dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.867"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/air_comment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="85dp"
+                                android:textSize="20dp"
+                                android:text="-"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.867"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/weather_comment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="50dp"
+                                android:textSize="20dp"
+                                android:text="loading"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.867"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <ImageButton
+                                android:elevation="3sp"
+                                android:id="@+id/arrow_button"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="5dp"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="@id/fixed_layout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.902"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintVertical_bias="0.0" />
+
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--The following is the expandable portion whose
+                            visibility is initially set to 'gone'.
+                            The parent LinearLayout contains 3 child LinearLayouts
+                            that hold a subject name and an icon each.-->
+                        <LinearLayout
+                            android:id="@+id/hidden_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/fixed_layout">
+
+                            <TextView
+                                android:id="@+id/tip"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"/>
+
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="\n대기"
+                    android:textSize="15sp"/>
+
+                <androidx.cardview.widget.CardView
+                    app:cardBackgroundColor="@color/gray"
+                    android:id="@+id/base_cardview3"
+                    style="@style/Base.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.473"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.021">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <!--Child LinearLayout 1-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="미세먼지"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/pm10gradeimage"
+                                    android:layout_gravity="center"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/pm10valuetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/pm10valueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+
+                            </LinearLayout>
+
+                            <!--Child LinearLayout 2-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="초미세먼지"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/pm25gradeimage"
+                                    android:layout_gravity="center"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/pm25valuetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/pm25valueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <!--Child LinearLayout 3-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="오존"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <ImageView
+                                    android:id="@+id/o3gradeimage"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/o3valuetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/o3valueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <!--Child LinearLayout 1-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="이산화질소"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/no2gradeimage"
+                                    android:layout_gravity="center"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/no2valuetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/no2valueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <!--Child LinearLayout 2-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="일산화탄소"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/cogradeimage"
+                                    android:layout_gravity="center"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/covaluetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/covalueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <!--Child LinearLayout 3-->
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:text="아황산가스"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/so2gradeimage"
+                                    android:layout_gravity="center"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/ic_baseline_cached_24" />
+
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/so2valuetext"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                                <TextView
+                                    android:textColor="@color/white"
+                                    android:id="@+id/so2valueword"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="\n날씨"
+                    android:textSize="15sp"/>
+
+
+
+                <androidx.cardview.widget.CardView
+                    app:cardBackgroundColor="@color/gray"
+                    android:id="@+id/base_cardview2"
+                    style="@style/Base.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.473"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.021">
+
+                    <!--This is a ConstraintLayout for the entire CardView
+                               including the expandable portion-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.511"
+                        tools:layout_editor_absoluteX="-55dp">
+
+                        <!--This is a ConstraintLayout for the fixed portion
+                            of the CardView. The elements
+                            that lie within the fixed portion of the CardView
+                            can be constrained to this layout.-->
+
+                        <!--The following is the expandable portion whose
+                            visibility is initially set to 'gone'.
+                            The parent LinearLayout contains 3 child LinearLayouts
+                            that hold a subject name and an icon each.-->
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/fixed_layout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0">
+
+
+                            <ImageView
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:id="@+id/sky"
+                                android:src="@drawable/ic_baseline_cloud_queue_24"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout2"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/tmn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.75"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout2"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.3" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.202"
+                                app:layout_constraintStart_toEndOf="@+id/tmn"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.3" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/tmx"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-˚"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.908"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout2"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.3" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/tmp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="35dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.799"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout2"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.098" />
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="℃"
+                                android:textSize="35dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="@+id/fixed_layout2"
+                                app:layout_constraintHorizontal_bias="0.911"
+                                app:layout_constraintStart_toStartOf="@+id/fixed_layout2"
+                                app:layout_constraintTop_toTopOf="@+id/fixed_layout2"
+                                app:layout_constraintVertical_bias="0.098" />
+
+                            <!--This is ImageButton for the expansion icon.-->
+
+                            <TextView
+                                android:textColor="@color/white"
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="13dp"
+                                android:layout_marginBottom="156dp"
+                                android:text=""
+                                android:textSize="20dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/fixed_layout2"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.913"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tmx"
+                                app:layout_constraintVertical_bias="0.0" />
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:textColor="@color/white"
+                                android:id="@+id/recyclerview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintBottom_toTopOf="@+id/arrow_button2"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                                app:layout_constraintVertical_bias="0.168">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <ImageButton
+                                android:visibility="gone"
+                                android:id="@+id/arrow_button2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="170dp"
+                                android:layout_marginEnd="170dp"
+                                android:layout_marginBottom="13dp"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <LinearLayout
+                            android:id="@+id/hidden_view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/fixed_layout2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <!--Child LinearLayout 1-->
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:text=""
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/ic_baseline_cloud_queue_24" />
+
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="날씨예보"
+                                        android:textSize="20dp" />
+                                </LinearLayout>
+
+                                <!--Child LinearLayout 2-->
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:text=""
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/ic_baseline_cloud_queue_24" />
+
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="날씨예보"
+                                        android:textSize="20dp" />
+                                </LinearLayout>
+
+                                <!--Child LinearLayout 3-->
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:text=""
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:src="@drawable/ic_baseline_cloud_queue_24" />
+
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="날씨예보"
+                                        android:textSize="20dp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text=" 측정소 지도     "
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"/>
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/map"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp">
+
+
+                </com.google.android.gms.maps.MapView>
+                <TextView
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="      "
+                    android:layout_width="match_parent"
+                    android:layout_height="500sp"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</FrameLayout>
